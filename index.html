@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="SIXPM: Digital Exhibit" data-es="SIXPM: Exhibición Digital">SIXPM: Digital Exhibit</title>
+    <style>
+        /* --- ESTILOS CSS --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+            transition: background-color 0.5s;
+        }
+
+        #language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            background: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        #language-toggle:hover {
+            background: #555;
+        }
+
+        .showcase {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 40px;
+            background-image: url('placeholder-fashion-image.jpg'); /* Reemplazar con una imagen de moda */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .showcase h1 {
+            font-size: 4vw;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .showcase p {
+            font-size: 1.5vw;
+            max-width: 700px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #6a6a6a;
+            transform: scale(1.05);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .showcase h1 {
+                font-size: 8vw;
+            }
+            .showcase p {
+                font-size: 4vw;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <button id="language-toggle" data-en="Español" data-es="English">Español</button>
+
+    <div class="showcase">
+        <h1 data-en="Timeless Accessories. Six O'Clock Mood." data-es="Accesorios Atemporales. El Mood de las Seis.">
+            Timeless Accessories. Six O'Clock Mood.
+        </h1>
+        <p data-en="Discover the pieces that define the moment when the day transitions into the evening. Elegance is not about time, but about presence." data-es="Descubre las piezas que definen el momento en que el día hace la transición a la noche. La elegancia no es cuestión de tiempo, sino de presencia.">
+            Discover the pieces that define the moment when the day transitions into the evening. Elegance is not about time, but about presence.
+        </p>
+        <a href="#" class="cta-button" data-en="View Collection" data-es="Ver Colección">
+            View Collection
+        </a>
+    </div>
+
+    <script>
+        // --- CÓDIGO JAVASCRIPT ---
+        const toggleButton = document.getElementById('language-toggle');
+        let currentLang = 'en';
+
+        // Función para cambiar el idioma
+        function toggleLanguage() {
+            // Alternar el idioma actual
+            currentLang = currentLang === 'en' ? 'es' : 'en';
+
+            // 1. Cambiar el idioma de la etiqueta <html>
+            document.documentElement.lang = currentLang;
+
+            // 2. Recorrer todos los elementos que tienen atributos data-en y data-es
+            document.querySelectorAll('[data-en], [data-es]').forEach(element => {
+                const newText = element.getAttribute(`data-${currentLang}`);
+                
+                // Si el elemento es un botón de alternancia, su texto cambia al nombre del otro idioma
+                if (element.id === 'language-toggle') {
+                    element.textContent = newText;
+                } 
+                // Para todos los demás elementos, el texto es el del idioma actual
+                else {
+                    element.textContent = newText;
+                }
+
+                // Caso especial para el título de la página
+                if (element.tagName === 'TITLE') {
+                    document.title = newText;
+                }
+            });
+        }
+
+        // Evento para escuchar el clic en el botón
+        toggleButton.addEventListener('click', toggleLanguage);
+    </script>
+
+</body>
+</html>
